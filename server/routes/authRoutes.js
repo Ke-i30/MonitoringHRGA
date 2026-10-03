@@ -1,0 +1,13 @@
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController');
+const { verifyToken } = require('../middlewares/auth');
+
+router.get('/departments', authController.getPublicDepartments);
+router.post('/register', authController.registerPublic);
+router.post('/login', authController.login);
+router.post('/verify-otp', authController.verifyOtp);
+router.post('/resend-otp', authController.resendOtp);
+router.get('/me', verifyToken, authController.getMe);
+
+module.exports = router;
